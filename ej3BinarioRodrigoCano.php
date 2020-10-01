@@ -3,26 +3,47 @@
 <BODY>
 <?php
 $ip="192.168.16.100/16";
-echo $ip ."=";
+$pun=strpos($ip, "/");
+$mask= substr($ip,++$pun);
+echo "IP :".$ip."</br>";
+echo "Mascara: ".$mask."</br>";
+
+echo "Direccion Red: ";
+
+//echo $ip ."=";
 $pun=strpos($ip, ".");
-#printf (" en binario es %b.",substr($ip,0,$pun));
 $ip1= substr($ip,0,$pun);
+$mask1=(String)str_pad(decbin($ip1),8,"0",STR_PAD_LEFT);
+//echo substr($mask1,0,$mask)."</BR>";
 
-echo str_pad(decbin($ip1),8,"0",STR_PAD_LEFT);
+$ip2= substr($ip, ++$pun);
+$pun=strpos($ip2, ".");
+$ip1= substr($ip2,0,$pun);
+$mask2=""+str_pad(decbin($ip1),8,"0",STR_PAD_LEFT);
+//echo str_pad(decbin($ip1),8,"0",STR_PAD_LEFT)."<br>";
+$ip1= substr($ip2,++$pun);
+//echo $ip1;//16.100/16
+//echo $mask1."".$mask2;
+//$mask3=$mask1."".$mask2;
 
-$ip2=substr($ip, ++$pun);
-$pun2=strpos($ip2, ".");
-#printf ("%b.",substr($ip2,0,$pun2));
-echo ".".str_pad(decbin($ip2),8,"0",STR_PAD_LEFT);
-
-$ip3=substr($ip2, ++$pun2);
-$pun3=strpos($ip3, ".");
-#printf ("%b.",substr($ip3,0,$pun3));
-echo ".". str_pad(decbin($ip3),8,"0",STR_PAD_LEFT);
-
-$ip4=substr($ip3, ++$pun3);
-#printf ("%b\n",$ip4);
-echo ".". str_pad(decbin($ip4),8,"0",STR_PAD_LEFT);;
+$pun=strpos($ip1, ".");
+$ip2= substr($ip1,0,$pun);//16
+$mask3=""+str_pad(decbin($ip2),8,"0",STR_PAD_LEFT);//16 en bin
+//echo "<br>".$ip2."ddd<br>";
+//echo str_pad(decbin($ip2),8,"0",STR_PAD_LEFT)."<br>";
+$ip1= substr($ip1,++$pun);//ip1=100/16
+//echo "<br>sss".$ip1."sss<br>";
+$pun=strpos($ip1, "/");
+$ip2= substr($ip1,0,$pun);//100
+$mask4=""+str_pad(decbin($ip2),8,"0",STR_PAD_LEFT);//100 en bin
+//echo str_pad(decbin($ip2),8,"0",STR_PAD_LEFT)."<br>";
+//$ip1= substr($ip2,++$pun);// mascara:16
+echo $mask1.".".$mask2.".".$mask3.".".$mask4;
+echo "<br>";
+//$mask=$mask1."".$mask2."".$mask3."".$mask4;
+$mask= str_pad(substr($mask1."".$mask2."".$mask3."".$mask4,0,16),32,"0",STR_PAD_RIGHT);
+echo "<br>";
+echo substr($mask,0,8).".".substr($mask,8,16).".".substr($mask,16,24).".".substr($mask,24,32);
 ?>
 </BODY>
 </HTML>
