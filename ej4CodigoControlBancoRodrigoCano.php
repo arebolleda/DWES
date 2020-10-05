@@ -4,6 +4,7 @@
 <h1>Calcular cuenta bancaria</h1>
 <?php
 $cuenta="12345678061234567890";
+echo "Cuenta: ".$cuenta."<br>";
 $suma1=(substr($cuenta,0,1)*4)+(substr($cuenta,1,1)*8)+(substr($cuenta,2,1)*5)+(substr($cuenta,3,1)*10);
 $suma1+=(substr($cuenta,4,1)*9)+(substr($cuenta,5,1)*7)+(substr($cuenta,6,1)*3)+(substr($cuenta,7,1)*6);
 $resto1=11-($suma1%11);
